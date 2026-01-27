@@ -1,0 +1,293 @@
+%%%% =========================
+%%%% Pojemności serwerów 
+%%%% =========================
+
+server_cpu_capacity = [8,8,8];   % vCPU
+server_mem_capacity = [16,16,16]; % GB
+
+%%%% =========================
+%%%% Parametry energetyczne
+%%%% =========================
+
+idle_power     = 50;   % W
+unit_power_cpu = 10;   % W per 1 vCPU
+unit_power_mem = 10;   % W per 1 GB
+
+%%%% =========================
+%%%% Zapotrzebowanie (λ_req)
+%%%% =========================
+
+lambda_req = [
+  %pierwszy łańcuch mikrousług
+  50,   % FRONT
+  30,   % AUTH
+  30,   % CATALOG_BROWSE
+  10,   % CATALOG_SEARCH
+  15,   % CART
+  5,    % PAYMENT
+  2.5,  % ORDER
+  47,   % CACHE
+  21,   % DB
+  
+  %drugi łańcuch mikrousług
+  50,   % FRONTEND2
+  15,   % CART2
+  30,   % PRODUCTCATALOG2
+  12.5, % CURRENCY2
+  7.5,  % PAYMENT2
+  10,   % SHIPPING2
+  5,    % EMAIL2
+  12.5, % CHECKOUT2
+  15,   % RECOMMENDATION2
+  2.5   % AD2
+];
+
+%%%% =========================
+%%%% Pojemność instancji = wyliczony z cpu_limit[m]/cpu_req[m]
+%%%% =========================
+
+capacity_inst = [
+  %pierwszy łańcuch mikrousług
+  2500,   % FRONT
+  250,    % AUTH
+  400,    % CATALOG_BROWSE
+  166,    % CATALOG_SEARCH  (166.67 → 166)
+  83,     % CART    (83.33 → 83)
+  50,     % PAYMENT
+  33,     % ORDER   (33.33 → 33)
+  10000,  % CACHE
+  1000,   % DB
+  %drugi łańcuch mikrousług
+  2500,   % FRONTEND2
+  83,     % CART2
+  400,    % PRODUCTCATALOG2
+  166,    % CURRENCY2
+  50,     % PAYMENT2
+  100,    % SHIPPING2
+  33,     % EMAIL2
+  83,     % CHECKOUT2
+  200,    % RECOMMENDATION2
+  50      % AD2
+];
+
+
+%%%% =========================
+%%%% Żądania CPU
+%%%% =========================
+
+cpu_req = [
+  %pierwszy łańcuch mikrousług
+  0.01,   % FRONTEND
+  0.06,   % AUTH
+  0.075,  % CATALOG_BROWSE
+  0.06,   % CATALOG_SEARCH
+  0.09,   % CART
+  0.10,   % PAYMENT
+  0.075,  % ORDER
+  0.0107, % CACHE
+  0.122,  % DB
+  %drugi łańcuch mikrousług
+  0.0025,  % FRONTEND2
+  0.0225,  % CART2
+  0.01875, % PRODUCTCATALOG2
+  0.015,   % CURRENCY2
+  0.025,   % PAYMENT2
+  0.02,    % SHIPPING2
+  0.0125,  % EMAIL2
+  0.015,   % CHECKOUT2
+  0.0175,  % RECOMMENDATION2
+  0.02     % AD2
+];
+
+%%%% =========================
+%%%% Limity CPU
+%%%% =========================
+
+cpu_limit = [
+  %pierwszy łańcuch mikrousług
+  0.5,   % FRONTEND
+  0.5,   % AUTH
+  0.5,   % CATALOG_BROWSE
+  0.5,   % CATALOG_SEARCH
+  0.5,   % CART
+  1.0,   % PAYMENT
+  1.0,   % ORDER
+  1.0,   % CACHE
+  2.0,   % DB
+  %drugi łańcuch mikrousług
+  0.5,   % FRONTEND2
+  0.5,   % CART2
+  0.5,   % PRODUCTCATALOG2
+  0.5,   % CURRENCY2
+  0.5,   % PAYMENT2
+  0.5,   % SHIPPING2
+  0.5,   % EMAIL2
+  0.5,   % CHECKOUT2
+  0.5,   % RECOMMENDATION2
+  1.0    % AD2
+];
+
+%%%% =========================
+%%%% Żądania RAM
+%%%% =========================
+
+mem_req = [
+  %pierwszy łańcuch mikrousług
+  0.1,   % FRONTEND
+  0.25,  % AUTH
+  0.5,   % CATALOG_BROWSE
+  1.0,   % CATALOG_SEARCH
+  0.25,  % CART
+  0.5,   % PAYMENT
+  0.5,   % ORDER
+  1.0,   % CACHE
+  4.0,   % DB
+  %drugi łańcuch mikrousług
+  0.1,   % FRONTEND2
+  0.25,  % CART2
+  0.5,   % PRODUCTCATALOG2
+  0.25,  % CURRENCY2
+  0.5,   % PAYMENT2
+  0.5,   % SHIPPING2
+  0.25,  % EMAIL2
+  0.5,   % CHECKOUT2
+  0.5,   % RECOMMENDATION2
+  1.0    % AD2
+];
+
+%%%% =========================
+%%%% Limity RAM
+%%%% =========================
+
+mem_limit = [
+  %pierwszy łańcuch mikrousług
+  1.0,   % FRONTEND
+  0.5,   % AUTH
+  1.0,   % CATALOG_BROWSE
+  2.0,   % CATALOG_SEARCH
+  0.5,   % CART
+  1.0,   % PAYMENT
+  1.0,   % ORDER
+  2.0,   % CACHE
+  8.0,   % DB
+  %drugi łańcuch mikrousług
+  1.0,   % FRONTEND2
+  0.5,   % CART2
+  1.0,   % PRODUCTCATALOG2
+  0.5,   % CURRENCY2
+  1.0,   % PAYMENT2
+  1.0,   % SHIPPING2
+  0.5,   % EMAIL2
+  1.0,   % CHECKOUT2
+  1.0,   % RECOMMENDATION2
+  2.0    % AD2
+];
+
+%%%% =========================
+%%%% Min/max liczba replik
+%%%% =========================
+
+replicas_min = [
+  %pierwszy łańcuch mikrousług
+  1,   % FRONTEND
+  1,   % AUTH
+  1,   % CATALOG_BROWSE
+  1,   % CATALOG_SEARCH
+  1,   % CART
+  1,   % PAYMENT
+  1,   % ORDER
+  1,   % CACHE
+  1,   % DB
+  
+  %drugi łańcuch mikrousług
+  1,   % FRONTEND2
+  1,   % CART2
+  1,   % PRODUCTCATALOG2
+  1,   % CURRENCY2
+  1,   % PAYMENT2
+  1,   % SHIPPING2
+  1,   % EMAIL2
+  1,   % CHECKOUT2
+  1,   % RECOMMENDATION2
+  1    % AD2
+];
+
+replicas_max = [
+  %pierwszy łańcuch mikrousług
+  10,  % FRONTEND
+  6,   % AUTH
+  6,   % CATALOG_BROWSE
+  6,   % CATALOG_SEARCH
+  5,   % CART
+  5,   % PAYMENT
+  5,   % ORDER
+  5,   % CACHE
+  3,   % DB
+  %drugi łańcuch mikrousług
+  10,  % FRONTEND2
+  5,   % CART2
+  6,   % PRODUCTCATALOG2
+  5,   % CURRENCY2
+  5,   % PAYMENT2
+  5,   % SHIPPING2
+  5,   % EMAIL2
+  5,   % CHECKOUT2
+  5,   % RECOMMENDATION2
+  3    % AD2
+];
+
+%%%% =========================
+%%%% Ilość czasu spędzonego na 1 vCPU podczas przetwarzania pojedynczego żądania przez daną usługę
+%%%% =========================
+
+proc_time = [
+  %pierwszy łańcuch mikrousług
+  0.0002,  % FRONTEND
+  0.0020,  % AUTH
+  0.0025,  % CATALOG_BROWSE
+  0.0060,  % CATALOG_SEARCH
+  0.0060,  % CART
+  0.0200,  % PAYMENT
+  0.0300,  % ORDER
+  0.0005,  % CACHE
+  0.0100,  % DB 
+  %drugi łańcuch mikrousług
+  0.0002,  % FRONTEND2
+  0.0060,  % CART2
+  0.0025,  % PRODUCTCATALOG2
+  0.0020,  % CURRENCY2
+  0.0200,  % PAYMENT2
+  0.0050,  % SHIPPING2
+  0.0030,  % EMAIL2
+  0.0060,  % CHECKOUT2
+  0.0020,  % RECOMMENDATION2
+  0.0040   % AD2
+];
+
+%%%% =========================
+%%%% Próg obciążeniowy, po którego przekroczeniu usługa m jest skalowana horyzontalnie w górę
+%%%% =========================
+
+threshold = [
+  %pierwszy łańcuch mikrousług
+  0.7,   % FRONTEND
+  0.65,  % AUTH
+  0.7,   % CATALOG_BROWSE
+  0.65,  % CATALOG_SEARCH
+  0.65,  % CART
+  0.6,   % PAYMENT
+  0.65,  % ORDER
+  0.8,   % CACHE
+  0.7,   % DB
+  %drugi łańcuch mikrousług
+  0.7,   % FRONTEND2
+  0.65,  % CART2
+  0.7,   % PRODUCTCATALOG2
+  0.65,  % CURRENCY2
+  0.6,   % PAYMENT2
+  0.65,  % SHIPPING2
+  0.7,   % EMAIL2
+  0.65,  % CHECKOUT2
+  0.7,   % RECOMMENDATION2
+  0.65   % AD2
+];

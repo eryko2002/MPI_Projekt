@@ -1,0 +1,35 @@
+total_energy = 775.907999999999
+inst:
+  FRONT: 1@S1, 1@S2, 1@S3
+  AUTH: 1@S1, 1@S2, 1@S3
+  CATALOG_BROWSE: 1@S1, 1@S2, 1@S3
+  CATALOG_SEARCH: 1@S1, 1@S2, 1@S3
+  CART: 1@S1, 1@S2, 1@S3
+  PAYMENT: 1@S1, 1@S2, 1@S3
+  ORDER: 4@S1, 4@S2, 2@S3
+  CACHE: 1@S1, 1@S2, 1@S3
+  DB: 1@S1, 1@S2, 1@S3
+  FRONTEND2: 1@S1, 1@S2, 1@S3
+  CART2: 1@S1, 1@S2, 1@S3
+  PRODUCTCATALOG2: 1@S1, 1@S2, 1@S3
+  CURRENCY2: 1@S1, 1@S2, 1@S3
+  PAYMENT2: 1@S1, 1@S2, 2@S3
+  SHIPPING2: 1@S1, 1@S2, 1@S3
+  EMAIL2: 1@S1, 1@S2, 1@S3
+  CHECKOUT2: 1@S1, 1@S2, 1@S3
+  RECOMMENDATION2: 1@S1, 1@S2, 1@S3
+  AD2: 1@S1, 1@S2, 1@S3
+server_on:
+  S1 = true
+  S2 = true
+  S3 = true
+server_cpu_usage:
+  S1 = 7.4136
+  S2 = 7.4136
+  S3 = 6.4136
+server_mem_usage:
+  S1 = 13.95
+  S2 = 13.95
+  S3 = 13.45
+----------
+==========

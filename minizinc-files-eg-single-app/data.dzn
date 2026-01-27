@@ -1,0 +1,171 @@
+%%%% =========================
+%%%% Pojemności serwerów 
+%%%% =========================
+
+server_cpu_capacity = [8,8,8];   % vCPU
+server_mem_capacity = [16,16,16]; % GB
+
+%%%% =========================
+%%%% Parametry energetyczne
+%%%% =========================
+
+idle_power     = 50;   % W
+unit_power_cpu = 10;   % W per 1 vCPU
+unit_power_mem = 10;   % W per 1 GB
+
+%%%% =========================
+%%%% Zapotrzebowanie (λ_req)
+%%%% =========================
+
+lambda_req = [
+  200,  % FRONT
+  120,  % AUTH
+  120,  % CATALOG_BROWSE
+  40,   % CATALOG_SEARCH
+  60,   % CART
+  20,   % PAYMENT
+  10,   % ORDER
+  128,  % CACHE
+  83    % DB
+];
+
+%%%% =========================
+%%%% Pojemność instancji (req/s)
+%%%% =========================
+
+capacity_inst = [
+  2500,   % FRONT
+  250,    % AUTH
+  400,    % CATALOG_BROWSE
+  166,    % CATALOG_SEARCH  (166.67 → 166)
+  83,     % CART    (83.33 → 83)
+  50,     % PAYMENT
+  33,     % ORDER   (33.33 → 33)
+  10000,  % CACHE
+  1000    % DB
+];
+
+
+%%%% =========================
+%%%% Żądania CPU — REALNE
+%%%% =========================
+
+cpu_req = [
+  0.01,   % FRONTEND
+  0.06,   % AUTH
+  0.075,  % CATALOG_BROWSE
+  0.06,   % CATALOG_SEARCH
+  0.09,   % CART
+  0.10,   % PAYMENT
+  0.075,  % ORDER
+  0.0107, % CACHE
+  0.122    % DB
+];
+
+%%%% =========================
+%%%% Limity CPU
+%%%% =========================
+
+cpu_limit = [
+  0.5,   % FRONTEND
+  0.5,   % AUTH
+  0.5,   % CATALOG_BROWSE
+  0.5,   % CATALOG_SEARCH
+  0.5,   % CART
+  1.0,   % PAYMENT
+  1.0,   % ORDER
+  1.0,   % CACHE
+  2.0    % DB
+];
+
+%%%% =========================
+%%%% Żądania RAM
+%%%% =========================
+
+mem_req = [
+  0.1,   % FRONTEND
+  0.25,  % AUTH
+  0.5,   % CATALOG_BROWSE
+  1.0,   % CATALOG_SEARCH
+  0.25,  % CART
+  0.5,   % PAYMENT
+  0.5,   % ORDER
+  1.0,   % CACHE
+  4.0    % DB
+];
+
+%%%% =========================
+%%%% Limity RAM
+%%%% =========================
+
+mem_limit = [
+  1.0,   % FRONTEND
+  0.5,   % AUTH
+  1.0,   % CATALOG_BROWSE
+  2.0,   % CATALOG_SEARCH
+  0.5,   % CART
+  1.0,   % PAYMENT
+  1.0,   % ORDER
+  2.0,   % CACHE
+  8.0    % DB
+];
+
+%%%% =========================
+%%%% Min/max liczba replik
+%%%% =========================
+
+replicas_min = [
+  2, % FRONTEND
+  2, % AUTH
+  2, % CATALOG_BROWSE
+  2, % CATALOG_SEARCH
+  2, % CART
+  2, % PAYMENT
+  2, % ORDER
+  2, % CACHE
+  2  % DB
+];
+
+replicas_max = [
+  10, % FRONTEND
+  6,  % AUTH
+  6,  % CATALOG_BROWSE
+  6,  % CATALOG_SEARCH
+  5,  % CART
+  5,  % PAYMENT
+  5,  % ORDER
+  5,  % CACHE
+  3   % DB
+];
+
+%%%% =========================
+%%%% Ilość czasu spędzonego na 1 vCPU podczas przetwarzania pojedynczego żądania przez daną usługę
+%%%% =========================
+
+proc_time = [
+  0.0002, % FRONTEND
+  0.0020, % AUTH
+  0.0025, % CATALOG_BROWSE
+  0.0060, % CATALOG_SEARCH
+  0.0060, % CART
+  0.0200, % PAYMENT
+  0.0300, % ORDER
+  0.0005, % CACHE
+  0.0100, % DB 
+];
+
+%%%% =========================
+%%%% Próg obciążeniowy, po którego przekroczeniu usługa m jest skalowana horyzontalnie w górę
+%%%% =========================
+
+threshold = [
+  0.7,  % FRONTEND
+  0.65, % AUTH
+  0.7,  % CATALOG_BROWSE
+  0.65, % CATALOG_SEARCH
+  0.65, % CART
+  0.6,  % PAYMENT
+  0.65, % ORDER
+  0.8,  % CACHE
+  0.7,  % DB
+];
