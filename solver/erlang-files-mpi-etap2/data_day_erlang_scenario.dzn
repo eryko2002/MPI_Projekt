@@ -1,0 +1,323 @@
+%%%% =========================
+%%%% Pojemności serwerów 
+%%%% =========================
+
+server_cpu_capacity = [80,80,80];   % wzrost 10krotny vCPU dla spelnienia ograniczeń zasobowych w multipleksacji Erlanga
+server_mem_capacity = [320,320,320]; % wzrost 20krotny pamięci RAM [GB] dla spelnienia ograniczeń zasobowych w multipleksacji Erlanga 
+
+%%%% =========================
+%%%% Parametry energetyczne
+%%%% =========================
+
+idle_power     = 50;   % W
+unit_power_cpu = 10;   % W per 1 vCPU
+unit_power_mem = 10;   % W per 1 GB
+
+%%%% =========================
+%%%% Zapotrzebowanie (λ_req)
+%%%% =========================
+
+lambda_req = [
+  %pierwszy łańcuch mikrousług
+  200,  % FRONT
+  120,  % AUTH
+  120,  % CATALOG_BROWSE
+  40,   % CATALOG_SEARCH
+  60,   % CART
+  20,   % PAYMENT
+  10,   % ORDER
+  128,  % CACHE
+  83,    % DB
+  
+  %drugi łańcuch mikrousług
+  200,  % FRONTEND2
+  60,   % CART2
+  120,  % PRODUCTCATALOG2
+  50,   % CURRENCY2
+  30,   % PAYMENT2
+  40,   % SHIPPING2
+  20,   % EMAIL2
+  50,   % CHECKOUT2
+  60,   % RECOMMENDATION2
+  10    % AD2
+];
+
+%%%% =========================
+%%%% Żądania CPU
+%%%% =========================
+
+cpu_req = [
+  %pierwszy łańcuch mikrousług
+  0.040,   % FRONTEND
+  0.240,   % AUTH
+  0.300,  % CATALOG_BROWSE
+  0.240,   % CATALOG_SEARCH
+  0.360,   % CART
+  0.400,   % PAYMENT
+  0.300,  % ORDER
+  0.0128, % CACHE
+  0.239,  % DB
+  %drugi łańcuch mikrousług
+  0.01,   % FRONTEND2
+  0.09,   % CART2
+  0.075,  % PRODUCTCATALOG2
+  0.06,   % CURRENCY2
+  0.10,   % PAYMENT2
+  0.08,   % SHIPPING2
+  0.05,   % EMAIL2
+  0.06,   % CHECKOUT2
+  0.07,   % RECOMMENDATION2
+  0.08    % AD2
+];
+
+%%%% =========================
+%%%% Limity CPU
+%%%% =========================
+
+cpu_limit = [
+  %pierwszy łańcuch mikrousług
+  0.5,   % FRONTEND
+  0.5,   % AUTH
+  0.5,   % CATALOG_BROWSE
+  0.5,   % CATALOG_SEARCH
+  0.5,   % CART
+  1.0,   % PAYMENT
+  1.0,   % ORDER
+  1.0,   % CACHE
+  2.0,   % DB
+  %drugi łańcuch mikrousług
+  0.5,   % FRONTEND2
+  0.5,   % CART2
+  0.5,   % PRODUCTCATALOG2
+  0.5,   % CURRENCY2
+  0.5,   % PAYMENT2
+  0.5,   % SHIPPING2
+  0.5,   % EMAIL2
+  0.5,   % CHECKOUT2
+  0.5,   % RECOMMENDATION2
+  1.0    % AD2
+];
+
+%%%% =========================
+%%%% Żądania RAM
+%%%% =========================
+
+mem_req = [
+  %pierwszy łańcuch mikrousług
+  0.1,   % FRONTEND
+  0.25,  % AUTH
+  0.5,   % CATALOG_BROWSE
+  1.0,   % CATALOG_SEARCH
+  0.25,  % CART
+  0.5,   % PAYMENT
+  0.5,   % ORDER
+  1.0,   % CACHE
+  4.0,   % DB
+  %drugi łańcuch mikrousług
+  0.1,   % FRONTEND2
+  0.25,  % CART2
+  0.5,   % PRODUCTCATALOG2
+  0.25,  % CURRENCY2
+  0.5,   % PAYMENT2
+  0.5,   % SHIPPING2
+  0.25,  % EMAIL2
+  0.5,   % CHECKOUT2
+  0.5,   % RECOMMENDATION2
+  1.0    % AD2
+];
+
+%%%% =========================
+%%%% Limity RAM
+%%%% =========================
+
+mem_limit = [
+  %pierwszy łańcuch mikrousług
+  1.0,   % FRONTEND
+  0.5,   % AUTH
+  1.0,   % CATALOG_BROWSE
+  2.0,   % CATALOG_SEARCH
+  0.5,   % CART
+  1.0,   % PAYMENT
+  1.0,   % ORDER
+  2.0,   % CACHE
+  8.0,   % DB
+  %drugi łańcuch mikrousług
+  1.0,   % FRONTEND2
+  0.5,   % CART2
+  1.0,   % PRODUCTCATALOG2
+  0.5,   % CURRENCY2
+  1.0,   % PAYMENT2
+  1.0,   % SHIPPING2
+  0.5,   % EMAIL2
+  1.0,   % CHECKOUT2
+  1.0,   % RECOMMENDATION2
+  2.0    % AD2
+];
+
+%%%% =========================
+%%%% Min/max liczba replik
+%%%% =========================
+
+replicas_min = [
+  %pierwszy łańcuch mikrousług
+  3,   % FRONTEND
+  2,   % AUTH
+  2,   % CATALOG_BROWSE
+  2,   % CATALOG_SEARCH
+  2,   % CART
+  2,   % PAYMENT
+  2,   % ORDER
+  2,   % CACHE
+  2,   % DB
+  %drugi łańcuch mikrousług
+  3,   % FRONTEND2
+  2,   % CART2
+  2,   % PRODUCTCATALOG2
+  2,   % CURRENCY2
+  2,   % PAYMENT2
+  2,   % SHIPPING2
+  2,   % EMAIL2
+  2,   % CHECKOUT2
+  2,   % RECOMMENDATION2
+  2    % AD2
+];
+
+replicas_max = [
+  %pierwszy łańcuch mikrousług
+  100,  % FRONTEND
+  100,   % AUTH
+  100,   % CATALOG_BROWSE
+  100,   % CATALOG_SEARCH
+  100,   % CART
+  100,   % PAYMENT
+  100,   % ORDER
+  100,   % CACHE
+  100,   % DB
+  %drugi łańcuch mikrousług
+  100,  % FRONTEND2
+  100,   % CART2
+  100,   % PRODUCTCATALOG2
+  100,   % CURRENCY2
+  100,   % PAYMENT2
+  100,   % SHIPPING2
+  100,   % EMAIL2
+  100,   % CHECKOUT2
+  100,   % RECOMMENDATION2
+  100    % AD2
+];
+
+%%%% =========================
+%%%% Ilość czasu spędzonego na 1 vCPU podczas przetwarzania pojedynczego żądania przez daną usługę
+%%%% =========================
+
+proc_time = [
+  %pierwszy łańcuch mikrousług
+  0.0002,  % FRONTEND
+  0.0020,  % AUTH
+  0.0025,  % CATALOG_BROWSE
+  0.0060,  % CATALOG_SEARCH
+  0.0060,  % CART
+  0.0200,  % PAYMENT
+  0.0300,  % ORDER
+  0.0005,  % CACHE
+  0.0100,  % DB 
+  %drugi łańcuch mikrousług
+  0.0002,  % FRONTEND2
+  0.0060,  % CART2
+  0.0025,  % PRODUCTCATALOG2
+  0.0020,  % CURRENCY2
+  0.0200,  % PAYMENT2
+  0.0050,  % SHIPPING2
+  0.0030,  % EMAIL2
+  0.0060,  % CHECKOUT2
+  0.0020,  % RECOMMENDATION2
+  0.0040   % AD2
+];
+
+%%%% =========================
+%%%% Próg obciążeniowy, po którego przekroczeniu usługa m jest skalowana horyzontalnie w górę
+%%%% =========================
+
+threshold = [
+  %pierwszy łańcuch mikrousług
+  0.7,   % FRONTEND
+  0.65,  % AUTH
+  0.7,   % CATALOG_BROWSE
+  0.65,  % CATALOG_SEARCH
+  0.65,  % CART
+  0.6,   % PAYMENT
+  0.65,  % ORDER
+  0.8,   % CACHE
+  0.7,   % DB
+  %drugi łańcuch mikrousług
+  0.7,   % FRONTEND2
+  0.65,  % CART2
+  0.7,   % PRODUCTCATALOG2
+  0.65,  % CURRENCY2
+  0.6,   % PAYMENT2
+  0.65,  % SHIPPING2
+  0.7,   % EMAIL2
+  0.65,  % CHECKOUT2
+  0.7,   % RECOMMENDATION2
+  0.65   % AD2
+];
+
+%%%% ===========================
+%% TABLICE ERLANGA 
+%%%% ===========================
+
+service_erlang_table = [|
+  20, 30, 20, 31, 20, 32, 20, 33, 20, 34, 20, 35, 20, 36 % FRONTEND
+| 60, 75, 60, 76, 60, 77, 60, 78, 60, 79, 60, 80, 60, 81 % AUTH
+| 36, 48, 36, 49, 36, 50, 36, 51, 36, 52, 36, 53, 36, 54 % CATALOG_BROWSE
+| 16, 25, 16, 26, 16, 27, 16, 28, 16, 29, 16, 30, 16, 31 % CATALOG_SEARCH
+| 18, 28, 18, 29, 18, 30, 18, 31, 18, 32, 18, 33, 18, 34 % CART
+| 20, 30, 20, 31, 20, 32, 20, 33, 20, 34, 20, 35, 20, 36 % PAYMENT
+| 20, 30, 20, 31, 20, 32, 20, 33, 20, 34, 20, 35, 20, 36 % ORDER
+| 6.4, 13, 6.4, 14, 6.4, 15, 6.4, 16, 6.4, 17, 6.4, 18, 6.4, 19 % CACHE
+| 124.5, 100, 124.5, 101, 124.5, 102, 124.5, 103, 124.5, 104, 124.5, 105, 124.5, 106 % DB
+| 20, 30, 20, 31, 20, 32, 20, 33, 20, 34, 20, 35, 20, 36 % FRONTEND2
+| 18, 28, 18, 29, 18, 30, 18, 31, 18, 32, 18, 33, 18, 34 % CART2
+| 36, 48, 36, 49, 36, 50, 36, 51, 36, 52, 36, 53, 36, 54 % PRODUCTCATALOG2
+| 10, 18, 10, 19, 10, 20, 10, 21, 10, 22, 10, 23, 10, 24 % CURRENCY2
+| 30, 42, 30, 43, 30, 44, 30, 45, 30, 46, 30, 47, 30, 48 % PAYMENT2
+| 20, 30, 20, 31, 20, 32, 20, 33, 20, 34, 20, 35, 20, 36 % SHIPPING2
+| 8, 15, 8, 16, 8, 17, 8, 18, 8, 19, 8, 20, 8, 21        % EMAIL2
+| 15, 24, 15, 25, 15, 26, 15, 27, 15, 28, 15, 29, 15, 30 % CHECKOUT2
+| 12, 20, 12, 21, 12, 22, 12, 23, 12, 24, 12, 25, 12, 26 % RECOMMENDATION2
+| 3, 8, 3, 9, 3, 10, 3, 11, 3, 12, 3, 13, 3, 14          % AD2
+|];
+
+
+%%%% =========================
+%%%% średni czas trwania sesji dla każdej usługi
+%%%% =========================
+
+avg_session_time = [
+  %pierwszy łańcuch mikrousług
+  0.1,  % FRONTEND
+  0.5,  % AUTH 
+  0.3,  % CATALOG_BROWSE
+  0.4,  % CATALOG_SEARCH
+  0.3,  % CART
+  1.0,  % PAYMENT
+  2.0,  % ORDER 
+  0.05, % CACHE 
+  1.5,  % DB
+  %drugi łańcuch mikrousług
+  0.1,  % FRONTEND2
+  0.3,  % CART2
+  0.3,  % PRODUCTCATALOG2
+  0.2,  % CURRENCY2
+  1.0,  % PAYMENT2
+  0.5,  % SHIPPING2
+  0.4,  % EMAIL2
+  0.3,  % CHECKOUT2
+  0.2,  % RECOMMENDATION2
+  0.3   % AD2
+];
+
+% Prawdopodobieństwo blokady
+P_blockade_target = 0.01;
+
+
