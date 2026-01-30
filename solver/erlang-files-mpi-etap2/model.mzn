@@ -1,7 +1,7 @@
 enum SERVICE =
 {
   %pierwszy łańcuch mikrousług
-  FRONT,
+  FRONTEND,
   AUTH,   
   CATALOG_BROWSE,
   CATALOG_SEARCH,
@@ -140,7 +140,7 @@ constraint
 % k) Z tablicy Erlanga: wyznaczenie optymalnej liczby instancji dla stałego ruchu Erlanga tak by osiągnąć zadane p-stwo blokady
 
 function int: service_id(SERVICE: m) =
-  if m == FRONT then 1 elseif m == AUTH then 2 
+  if m == FRONTEND then 1 elseif m == AUTH then 2 
   elseif m == CATALOG_BROWSE then 3 elseif m == CATALOG_SEARCH then 4
   elseif m == CART then 5 elseif m == PAYMENT then 6 elseif m == ORDER then 7
   elseif m == CACHE then 8 elseif m == DB then 9

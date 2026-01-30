@@ -16,6 +16,6 @@
 
 cd erlang-files-mpi-etap2/
 
-#docker run --rm -v $(pwd):/data -w /data minizinc/minizinc:latest minizinc model.mzn data_day_erlang_scenario.dzn --solver gecode --time-limit 10000 > results-erlang/results_day_erlang.txt
+docker run --rm -v $(pwd):/data -w /data minizinc/minizinc:latest minizinc model.mzn data_day_erlang_scenario.dzn --solver gecode --time-limit 10000 > results-erlang/results_day_erlang.txt
 
-docker run --rm -v $(pwd):/data -w /data minizinc/minizinc:latest minizinc model.mzn data_day_erlang_scenario.dzn --solver gecode 
+#docker run --rm -v $(pwd):/data -w /data minizinc/minizinc:latest minizinc model.mzn data_day_erlang_scenario.dzn --solver gecode 

@@ -1,6 +1,6 @@
 total_energy = 7520.764
 inst:
-  FRONT: 0@S1, 30@S2, 0@S3
+  FRONTEND: 0@S1, 30@S2, 0@S3
   AUTH: 0@S1, 75@S2, 0@S3
   CATALOG_BROWSE: 0@S1, 48@S2, 0@S3
   CATALOG_SEARCH: 25@S1, 0@S2, 0@S3
